@@ -1,6 +1,7 @@
 gsap.registerPlugin(ScrollTrigger);
 
 const tlLoader = gsap.timeline()
+const choose = gsap.timeline()
 
 tlLoader
 .set('.loader__item',{ yPercent: -100 })
@@ -11,7 +12,6 @@ tlLoader
 '-=1')
 .to('.loader__item',{ yPercent: -100, duration: 2.5 },
 '-=1')
-
 
 const desktopMedia = window.matchMedia('(min-width: 992px)')
 
@@ -102,10 +102,18 @@ if(desktopMedia.matches){
         yPercent: 100,
         opacity: 0
     })
-
+    choose.from('.why__image', 1.5, {
+        scrollTrigger: {
+            trigger: '.section__choose',
+            start: '0 0',
+            scrub: true
+        },
+        css: {
+            width: '0',
+            height: '100%'
+        }
+    })
 }
-
-const choose = gsap.timeline()
 
 choose.from('.section__choose', {
     scrollTrigger: {
@@ -141,17 +149,6 @@ choose.from('.section__choose', {
         scrub: true
     },
     scale: 0
-})
-.from('.why__image', 1.5, {
-    scrollTrigger: {
-        trigger: '.section__choose',
-        start: '0 0',
-        scrub: true
-    },
-    css: {
-        width: '0',
-        height: '100%'
-    }
 })
 .from('.why__item', 1.5, {
     scrollTrigger: {
